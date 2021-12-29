@@ -25,7 +25,8 @@ namespace MediatrDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
-
+            services.AddSwaggerDocument();
+            services.AddMvcCore().AddApiExplorer();
 
             services.AddRazorPages();
         }
@@ -48,6 +49,10 @@ namespace MediatrDemo
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
 
             app.UseAuthorization();
 

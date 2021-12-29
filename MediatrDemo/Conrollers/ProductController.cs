@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MediatrDemo.Med.Commands;
 using MediatrDemo.Med.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace MediatrDemo.Conrollers
         }
 
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             var query = new GetProductByIdQuery() { Id = id };
@@ -33,6 +34,13 @@ namespace MediatrDemo.Conrollers
         {
             var query = new GetAllProductQuery();
             return Ok(await mediator.Send(query));
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> Post(CreateProductCommend command)
+        {
+            
+            return Ok(await mediator.Send(command));
         }
 
     }
